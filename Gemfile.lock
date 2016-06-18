@@ -48,6 +48,7 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.1.0)
     erubis (2.7.0)
     execjs (2.7.0)
     globalid (0.3.6)
@@ -110,6 +111,8 @@ GEM
     rake (11.2.2)
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
+    russian (0.6.0)
+      i18n (>= 0.5.0)
     sprockets (3.6.0)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -139,9 +142,11 @@ PLATFORMS
 DEPENDENCIES
   byebug
   devise
+  devise-i18n
   jquery-rails
   pg
   rails (~> 4.2.6)
+  russian
   sqlite3
   twitter-bootstrap-rails
   uglifier (>= 1.3.0)

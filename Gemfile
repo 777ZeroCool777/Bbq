@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '~> 4.2.6'
 
 gem 'devise'
+gem 'devise-i18n'
+gem 'russian'
 
 gem 'twitter-bootstrap-rails'
 
