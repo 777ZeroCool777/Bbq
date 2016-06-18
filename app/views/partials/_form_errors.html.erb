@@ -1,7 +1,9 @@
+<!-- Универсальный паршиал отображения ошибок валидации любой модели -->
+
 <% errors = model.errors %>
 
 <% if errors.any? %>
-    <div id="alert alert-danger">
+    <div class="alert alert-danger">
       <div class="lead buffer-bottom">
         В вашей форме <%= errors.count %> ошибок
       </div>
