@@ -9,6 +9,9 @@
 
       <div class="event-info-inner row">
         <div class="col-md-6">
+          <div class="col-md-6">
+            <div class="event-map" id="map" data-address="<%= @event.address %>"></div>
+          </div>
           <div class="event-description">
             <h1><%= @event.title %></h1>
             <%# Для перевода времени в русский формат используем I18n %>
@@ -16,7 +19,7 @@
             <h3><%= l @event.datetime, format: :short %></h3>
             <h3>
               <small>
-                <%= link_to @event.address, "https://yandex.ru/maps/?text=#{@event.address}" %>
+                <%= @event.address %>
               </small>
             </h3>
             <p><%= @event.description %></p>
