@@ -8,7 +8,7 @@ class Comment < ActiveRecord::Base
   validates :user_name, presence: true, unless: 'user.present?'
 
   def user_name
-    if user_name.present?
+    if user.present?
       user.name
     else
       super

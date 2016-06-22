@@ -4,13 +4,21 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show]
   before_action :set_current_user_event, only: [:edit, :update, :destroy]
 
+  # before_action :pincode_guard!, only: [:show]
+
   # GET /events
   def index
     @events = Event.all
   end
 
+  # def set_event
+  #   @event = Event.find(params[:id])
+  # end
+
   # GET /events/1
   def show
+    @new_comment = @event.comments.build(params[:comment])
+    @new_subscription = @event.subscriptions.build(params[:subscription])
   end
 
   # GET /events/new
@@ -50,9 +58,22 @@ class EventsController < ApplicationController
 
   private
 
-  def set_current_user_event
-    @event = current_user.events.find(params[:id])
-  end
+  # def pincode_guard
+  #   return if @event.pincode.blank?
+  #   return if user_signed_in? && current_user == @event.user
+  #
+  #   if @event.pincode == params[:pincode]
+  #     cookies.permanent["event_#{event.id}_pincode"] == params[:pincode]
+  #   end
+  #
+  #   if cookies.permanent["events_#{event.id}_pincode"] !=event.pincode
+  #     flash.now[:alert] = "Wrong pincode" if params[:pincode].present?
+  #     render 'pincode_from'
+  #
+  #   end
+    def set_current_user_event
+      @event = current_user.events.find(params[:id])
+    end
 
     def set_event
       @event = Event.find(params[:id])
@@ -61,4 +82,6 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(:title, :address, :datetime, :description)
     end
-end
+  end
+
+

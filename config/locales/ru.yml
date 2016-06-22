@@ -14,6 +14,7 @@ ru:
         address: 'Место проведения'
         datetime: 'Дата и время'
         description: 'Описание'
+        pincode:
 
   controllers:
     events:
@@ -22,6 +23,21 @@ ru:
       destroy: 'Событие удалено'
     user:
       update: 'Вы обновли свой профиль'
+    comments:
+      destroyed: 'Коментарий удален'
+      created: 'Ваш коментарий добавлен'
+      error: 'Ошибка с коментарием'
+    subscription:
+      created: 'Вы подписаны на это событие'
+      destroyed: 'Участник отписан'
+      error: 'Подписка/отписка не сработала'
   app:
     name: 'Шашлыки'
     company: 'Хороший программист'
+  comments:
+    comment:
+      destroy_confirm: 'Вы уверены, что хотите удалить этот коментарий?'
+
+  subscriptions:
+    subscription:
+      destroy_confirm: 'Вы уверены, что хотите удалить эту подписку?'

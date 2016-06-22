@@ -5,7 +5,7 @@
 <% if errors.any? %>
     <div class="alert alert-danger">
       <div class="lead buffer-bottom">
-        В вашей форме <% Russion::p(errors.count, "ошибка", "ошибок", "ошибки") %>
+        В вашей форме <%= errors.count %> ошибок
       </div>
 
       <ul>
