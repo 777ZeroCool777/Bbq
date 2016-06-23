@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
     @new_comment.user = current_user
 
     if @new_comment.save
+      notify_subscribers(@event, @new_comment)
       # если сохранился успешно, редирект на страницу самого события
       redirect_to @event, notice: I18n.t('controllers.comments.created')
     else
@@ -43,5 +44,14 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body, :user_name)
+  end
+
+  def notify_subscribers(event, comment)
+    # собираю всех подписчеков и автора события в массив мэйлов, исключаю повторяющиеся
+    all_emails = (event.subscriptions.map(&:user_email) + [event.user.email]).uniq
+
+    all_emails.each do |mail|
+      EventMailer.comment(event, comment, mail).deliver_now
+    end
   end
 end

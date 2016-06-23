@@ -7,8 +7,12 @@ class SubscriptionsController < ApplicationController
    @new_subscription.user = current_user
 
    if @new_subscription.save
+     # Отправляю письмо автору события
+     EventMailer.subscription(@event, @new_subscription).deliver_now
+     # если сохранилась успешно, редирект на страницу самого события
      redirect_to @event, notice: I18n.t('controllers.subscription.created')
    else
+     # если ошибки — рендерю здесь же шаблон события
      render 'events/show', alert: I18n.t('controllers.subscription.error')
    end
  end
