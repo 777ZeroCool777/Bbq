@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
 
   after_commit :linc_subscriptions, on: :create
 
+  mount_uploader :avatar, AvatarUploader
+
   private
 
   def set_name

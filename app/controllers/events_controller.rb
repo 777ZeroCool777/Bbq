@@ -1,24 +1,31 @@
+# (с) goodprogrammer.ru
+#
+# Контроллер, управляющий событиями
 class EventsController < ApplicationController
+  # встроенный в девайз фильтр - посылает незалогиненного пользователя
   before_action :authenticate_user!, except: [:show, :index]
 
+  # задаем объект @event для экшена show
   before_action :set_event, only: [:show]
-  before_action :set_current_user_event, only: [:edit, :update, :destroy]
 
-  # before_action :pincode_guard!, only: [:show]
+  # задаем объект @event от текущего юзера
+  before_action :set_current_user_event, only: [:edit, :update, :destroy]
 
   # GET /events
   def index
     @events = Event.all
   end
 
-  # def set_event
-  #   @event = Event.find(params[:id])
-  # end
-
   # GET /events/1
   def show
+    # Болванка модели для формы добавления комментария
     @new_comment = @event.comments.build(params[:comment])
+
+    # Болванка модели для формы подписки
     @new_subscription = @event.subscriptions.build(params[:subscription])
+
+    # Болванка модели для формы добавления фотографии
+    @new_photo = @event.photos.build(params[:photo])
   end
 
   # GET /events/new
@@ -35,6 +42,8 @@ class EventsController < ApplicationController
     @event = current_user.events.build(event_params)
 
     if @event.save
+      # Используем сообщение из файла локалей ru.yml
+      # controllers -> events -> created
       redirect_to @event, notice: I18n.t('controllers.events.created')
     else
       render :new
@@ -44,7 +53,7 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   def update
     if @event.update(event_params)
-      redirect_to @event, notice: I18n.t('controllers.events.update')
+      redirect_to @event, notice: I18n.t('controllers.events.updated')
     else
       render :edit
     end
@@ -53,35 +62,19 @@ class EventsController < ApplicationController
   # DELETE /events/1
   def destroy
     @event.destroy
-    redirect_to events_url, notice: I18n.t('controllers.events.destroy')
+    redirect_to events_url, notice: I18n.t('controllers.events.destroyed')
   end
 
   private
-
-  # def pincode_guard
-  #   return if @event.pincode.blank?
-  #   return if user_signed_in? && current_user == @event.user
-  #
-  #   if @event.pincode == params[:pincode]
-  #     cookies.permanent["event_#{event.id}_pincode"] == params[:pincode]
-  #   end
-  #
-  #   if cookies.permanent["events_#{event.id}_pincode"] !=event.pincode
-  #     flash.now[:alert] = "Wrong pincode" if params[:pincode].present?
-  #     render 'pincode_from'
-  #
-  #   end
-    def set_current_user_event
-      @event = current_user.events.find(params[:id])
-    end
-
-    def set_event
-      @event = Event.find(params[:id])
-    end
-
-    def event_params
-      params.require(:event).permit(:title, :address, :datetime, :description)
-    end
+  def set_current_user_event
+    @event = current_user.events.find(params[:id])
   end
 
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
+  def event_params
+    params.require(:event).permit(:title, :address, :datetime, :description)
+  end
+end

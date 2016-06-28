@@ -1,4 +1,5 @@
-
+# (с) goodprogrammer.ru
+#
 # Контроллер вложенного ресурса комментариев
 class CommentsController < ApplicationController
   # задаем "родительский" event для коммента
@@ -12,7 +13,9 @@ class CommentsController < ApplicationController
     @new_comment.user = current_user
 
     if @new_comment.save
+      # уведомляем всех подписчиков о новом комментарии
       notify_subscribers(@event, @new_comment)
+
       # если сохранился успешно, редирект на страницу самого события
       redirect_to @event, notice: I18n.t('controllers.comments.created')
     else
@@ -47,9 +50,11 @@ class CommentsController < ApplicationController
   end
 
   def notify_subscribers(event, comment)
-    # собираю всех подписчеков и автора события в массив мэйлов, исключаю повторяющиеся
+    # собираем всех подписчиков и автора события в массив мэйлов, исключаем повторяющиеся
     all_emails = (event.subscriptions.map(&:user_email) + [event.user.email]).uniq
 
+    # XXX: Этот метод может выполняться долго из-за большого числа подписчиков
+    # поэтому в реальных приложениях такие вещи надо выносить в background задачи!
     all_emails.each do |mail|
       EventMailer.comment(event, comment, mail).deliver_now
     end

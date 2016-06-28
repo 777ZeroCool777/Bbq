@@ -12,8 +12,13 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'jquery-rails'
 
-# gem 'carrierwave'
-# gem 'rmagick'
+gem 'carrierwave'
+
+gem 'rmagick'
+
+
+# gem 'therubyracer'
+
 
 group :production do
   gem 'pg'
