@@ -16,9 +16,7 @@ gem 'carrierwave'
 
 gem 'rmagick'
 
-
-# gem 'therubyracer'
-
+gem 'fog-aws'
 
 group :production do
   gem 'pg'
