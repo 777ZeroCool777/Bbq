@@ -33,7 +33,7 @@ ru:
       created: 'Событие было успешно создано'
       update: 'Событие обновлено'
       destroy: 'Событие удалено'
-    users:
+    user:
       updated: 'Вы обновли свой профиль'
     comments:
       destroyed: 'Коментарий удален'
