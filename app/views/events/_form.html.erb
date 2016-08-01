@@ -24,7 +24,7 @@
     <div class="actions">
       <%= f.submit 'Сохранить', class: 'btn btn-primary' %>
       <% if @event.persisted? %>
-          <%= link_to 'Удалить событие', event_path(@event), method: :delete, data: {confirm: 'Точно удалить событие?'}, class: 'btn btn-primary' %>
+          <%= link_to 'Удалить событие', event_path(@event), method: :delete, data: {confirm: 'Действительно ли вы хотите удалить событие?'}, class: 'btn btn-primary' %>
       <% end %>
       или <%= link_to 'вернуться', :back %>
     </div>
