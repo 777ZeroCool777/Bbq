@@ -31,7 +31,7 @@ class Subscription < ActiveRecord::Base
 
   def email_valid?
     if User.where(email: user_email).exists?
-      errors.add(:base, I18n.t('controllers.subscription.emails_error'))
+      errors.add(:base, :emails_error)
     end
   end
 
