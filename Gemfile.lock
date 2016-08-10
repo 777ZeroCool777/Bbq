@@ -173,7 +173,6 @@ DEPENDENCIES
   devise-i18n
   fog-aws
   jquery-rails
-  mail
   pg
   rails (~> 4.2.6)
   rmagick
