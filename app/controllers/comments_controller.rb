@@ -51,7 +51,9 @@ class CommentsController < ApplicationController
 
   def notify_subscribers(event, comment)
     # собираем всех подписчиков и автора события в массив мэйлов, исключаем повторяющиеся
-    all_emails = (event.subscriptions.map(&:user_email)).uniq.delete("#{event.user.email}")
+    all_emails = (event.subscriptions.map(&:user_email) + [event.user.email]).uniq
+
+    all_emails.delete(current_user.email) if current_user.email != nil
 
     # XXX: Этот метод может выполняться долго из-за большого числа подписчиков
     # поэтому в реальных приложениях такие вещи надо выносить в background задачи!
