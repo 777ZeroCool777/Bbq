@@ -18,6 +18,8 @@ gem 'rmagick'
 
 gem 'fog-aws'
 
+gem 'mail'
+
 group :production do
   gem 'pg'
 end
