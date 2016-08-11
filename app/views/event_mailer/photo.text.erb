@@ -1,9 +1,9 @@
 <%= t '.title' %>
 -----
 
-<%= @photo.body %>
+<%= @photo.photo %>
 
-<%= t '.author' %>
+<%= t '.author' %>: <%= @photo.user_name %>
 
 ---------------------
 <%= t '.event' %>: <%= l @event.datetime %>
