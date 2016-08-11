@@ -79,3 +79,6 @@ ru:
         owner: 'Организатор'
       photo:
         title: 'Новая фоточка'
+        author: 'Автор'
+        datetime: 'Загружена'
+        owner: 'Организатор'
