@@ -1,6 +1,6 @@
 <h1><%= t '.title' %></h1>
 <p><a href="<%= @photo.photo %>">
-  <img src="<%= @photo.photo %>" alt="[Фоточка]">
+  <img src="<%= @photo.photo.thumb %>" alt="[Фоточка]">
 </a> </p>
 <p> <%= t '.author' %>: <strong><%= @photo.user.name %></strong></p>
 
