@@ -18,7 +18,7 @@
             <h3><%= l @event.datetime, format: :short %></h3>
             <h3>
               <small>
-                <%= link_to @event.address, "https://yandex.ru/maps/?text=#{@event.address}" %>
+                <%= @event.address %>
               </small>
             </h3>
             <p><%= @event.description %></p>
@@ -30,6 +30,11 @@
               </div>
           <% end %>
         </div>
+
+        <div class="col-md-6">
+          <div class="event-map" id="map" data-address="<%= @event.address %>"></div>
+        </div>
+
       </div>
     </div>
   </div>

@@ -11,6 +11,8 @@ class EventsController < ApplicationController
   # задаем объект @event от текущего юзера
   before_action :set_current_user_event, only: [:edit, :update, :destroy]
 
+  before_action :pincode_guard, only: [:show]
+
   # GET /events
   def index
     @events = Event.all
@@ -66,6 +68,24 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def pincode_guard
+    return true if @event.pincode.blank?
+    return true if user_signed_in? && current_user == @event.user
+
+    if params[:pincode].present? && @event.pincode_valid?(params[:pincode])
+      # если правильно, запоминаем в куках этого юзера этот пинкод для данного события
+      cookies.permanent["events_#{@event.id}_pincode"] = params[:pincode]
+    end
+
+    # проверяем - верный ли в куках пинкод, если нет — ругаемся
+    unless @event.pincode_valid?(cookies.permanent["events_#{@event.id}_pincode"])
+      flash.now[:alert] = I18n.t('controllers.events.wrong_pincode') if params[:pincode].present?
+      render 'pincode_form'
+    end
+
+  end
+
   def set_current_user_event
     @event = current_user.events.find(params[:id])
   end
@@ -75,6 +95,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :address, :datetime, :description)
+    params.require(:event).permit(:title, :address, :datetime, :description, :pincode)
   end
 end
