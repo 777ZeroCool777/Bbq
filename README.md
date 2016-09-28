@@ -2,7 +2,7 @@
 Учебная программа го на шашлыки.  
 С ивентами и отправкой почты.  
 Можно организовывать события, загружать фоточки, а также создавть мироприятия с пин-кодом.  
-Сделана на [rails 4.2.](http://rubyonrails.org/) под хостинг [heroku](https://www.heroku.com)  
+Приложение сделано на [rails 4.2.](http://rubyonrails.org/) под хостинг [heroku](https://www.heroku.com)  
 ## Демо  
 http://supermegabbq.herokuapp.com
 ## Установка
