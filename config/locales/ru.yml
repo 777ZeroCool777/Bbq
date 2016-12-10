@@ -34,7 +34,7 @@ ru:
   controllers:
     events:
       created: 'Событие было успешно создано'
-      update: 'Событие обновлено'
+      updated: 'Событие обновлено'
       destroyed: 'Событие успешно удалено'
       wrong_pincode: 'Неправильный пин-код'
     user:
